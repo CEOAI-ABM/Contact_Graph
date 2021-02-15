@@ -57,10 +57,10 @@ def Run(deviceid, time_ref):
 	score={}
 	for i in range(len(df_inf)):
 		time_inf= df_inf.iloc[i,1]
-		score_tmp= decayfunc(time_inf,time_ref)
+		score_tmp = decayfunc(time_inf,time_ref)
 		df_tmp= df2[df2.time==time_inf]
 		for j in range(len(df_tmp)):
-			if proximityfunc(df_inf.iloc[i,3],df_inf.iloc[i,4],df2.iloc[j,3],df2.iloc[j,4]):
+			if proximityfunc(df_inf.iloc[i,3],df_inf.iloc[i,4],df_tmp.iloc[j,3],df_tmp.iloc[j,4]):
 				try:
 					score[df_tmp.iloc[j,2]]+= score_tmp
 				except:
@@ -69,21 +69,44 @@ def Run(deviceid, time_ref):
 	################## Bluetooth Contruction ##############
 	#Bluetooth Connection and Score Generation
 	with open(r'C:\Users\HP\Desktop\project\Contact_Graph\bluetooth.txt') as json_file:
-			data1 = json.load(json_file)
-			data1 = data1[deviceid]
-			#print(data1)
-			for time, arr in data1.items():
-					time_obj = datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
-					if (time_ref-datetime.timedelta(days=prm.duration)) > time_obj:
-						continue
-					df_time= df2[df2.time==time_obj]
-					score_tmp= decayfunc(time_obj,time_ref)
-					for dev_id in arr:
-						if dev_id not in df_time.time:
-							try:
-								score[dict_identity[dev_id]]+= score_tmp
-							except:
-								score[dict_identity[dev_id]]= score_tmp
+		data1 = json.load(json_file)
+		data1 = data1[deviceid]
+		#print(data1)
+		for time, arr in data1.items():
+				time_obj = datetime.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
+				if (time_ref-datetime.timedelta(days=prm.duration)) > time_obj:
+					continue
+				df_time= df2[df2.time==time_obj]
+				score_tmp= decayfunc(time_obj,time_ref)
+				for dev_id in arr:
+					if dev_id not in df_time.time:
+						try:
+							score[dict_identity[dev_id]]+= score_tmp
+						except:
+							score[dict_identity[dev_id]]= score_tmp
+
+	#############################################imputed score addition ########
+	query = ("SELECT * FROM imputed WHERE time BETWEEN '{}' AND '{}'".format(max(begin_time,time_ref-datetime.timedelta(days=prm.duration)),time_ref))  ## incomplete
+	db_cursor.execute(query)
+	df_imp=pd.DataFrame(db_cursor.fetchall())
+	if df_imp.empty:
+		print("Empty imputed database")
+	else:
+		df_imp.columns= ['slno','time','node','lat','long']
+		df_imp_inf= df_imp[df_imp.node==inf_node]
+		df_imp= df_imp[df_imp.node!=inf_node]
+         ###### score when the missing data is of infected node #######
+		for i in range(len(df_imp_inf)):
+			time_inf= df_imp_inf.iloc[i,1]
+			score_tmp = decayfuncimputed(time_inf,time_ref)
+			df_tmp= df_imp[df_imp.time==time_inf]
+			for j in range(len(df_tmp)):
+				if proximityfuncimputed(df_imp_inf.iloc[i,3],df_imp_inf.iloc[i,4],df_tmp.iloc[j,3],df_tmp.iloc[j,4]):
+					try:
+						score[df_tmp.iloc[j,2]]+= score_tmp
+					except:
+						score[df_tmp.iloc[j,2]]= score_tmp
+
 
 	#############################################
 	node_list=[inf_node]
