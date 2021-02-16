@@ -4,12 +4,20 @@ import matplotlib.cm as cm
 import numpy as np
 import pandas as pd
 
+<<<<<<< HEAD
 def plotgraph(partiton,edgedata):
   print(edgedata)
+||||||| 7d73974
+def plotgraph(partiton,edgedata):
+  
+=======
+def plt_graph(partition,edgedata):
+  
+>>>>>>> 7e22caac2e71f6be2a1fb7c658f95a57feb3afc1
   edge_data = pd.DataFrame(edgedata, columns=["node1", "node2","weight"])
   print(edgedata)
   g = nx.Graph()
-  g = nx.from_pandas_edgelist(df, source='node1', target='node2', edge_attr ='weight',)
+  g = nx.from_pandas_edgelist(edge_data, source='node1', target='node2', edge_attr ='weight',)
   # visualization
   plt.figure(figsize=(20,16))
   plt.grid(False)
