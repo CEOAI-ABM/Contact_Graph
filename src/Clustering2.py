@@ -249,8 +249,8 @@ def community_detect(time_lower,time_upper):
     node_matrix = np.ones(len(node_list), float)*0.15
     edge_matrix = np.zeros((len(node_list), len(node_list)), float)
     for row in edge_list:
-        edge_matrix[row[0]][row[1]] = row[2]
-        edge_matrix[row[1]][row[0]] = row[2]
+        edge_matrix[row[0]-1][row[1]-1] = row[2]
+        edge_matrix[row[1]-1][row[0]-1] = row[2]
         
     partition = Detect_Cluster(node_matrix, edge_matrix)
     print(partition)
