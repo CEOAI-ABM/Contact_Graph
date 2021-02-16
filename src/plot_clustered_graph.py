@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import numpy as np
 
-def plotgraph(partiton,edgedata):
+def plt_graph(partition,edgedata):
   
   edge_data = pd.DataFrame(edgedata, columns=["node1", "node2","weight"])
   g = nx.Graph()
-  g = nx.from_pandas_edgelist(df, source='node1', target='node2', edge_attr ='weight',)
+  g = nx.from_pandas_edgelist(edge_data, source='node1', target='node2', edge_attr ='weight',)
   # visualization
   plt.figure(figsize=(20,16))
   plt.grid(False)
