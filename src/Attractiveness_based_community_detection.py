@@ -254,6 +254,6 @@ def community_detect(time_lower,time_upper):
         
     partition = Detect_Cluster(node_matrix, edge_matrix)
     print(partition)
-    pg.plt_graph(partition,g)
+    pg.plt_graph(partition,edge_list)
     
     return partition

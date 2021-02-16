@@ -12,13 +12,5 @@ def community_detect(time_lower,time_upper):
   g = nx.from_pandas_edgelist(edge_data, source='node1', target='node2', edge_attr ='weight',)
   partition = community_louvain.best_partition(g)
   print(partition)
-<<<<<<< HEAD:src/Clustering1.py
-  pg.plotgraph(partition,g)
-  return partition
-||||||| 7d73974:src/Clustering1.py
-  pg.plt_graph(partition,g)
-  return partition
-=======
   pg.plt_graph(partition,edgedata)
   return partition
->>>>>>> 7e22caac2e71f6be2a1fb7c658f95a57feb3afc1:src/Louvain_clustering_algorithm.py

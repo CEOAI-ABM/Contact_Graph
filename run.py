@@ -4,5 +4,5 @@ import datetime
 #src.completegraph.fullgraphplot(datetime.datetime.strptime('2020-12-18 17:00:00', '%Y-%m-%d %H:%M:%S'),datetime.datetime.strptime('2020-12-27 17:00:00', '%Y-%m-%d %H:%M:%S')) #plot full graph
 #src.trajectory.Run(datetime.datetime.strptime('2020-12-18 17:00:00', '%Y-%m-%d %H:%M:%S'),datetime.datetime.strptime('2020-12-29 17:00:00', '%Y-%m-%d %H:%M:%S'))
 # trajectory function take time interval inputs and do the imputation for missing points with option to skip larger gap of missing points and saves the prediction in imputed table
-#src.clustering1.community_detect(datetime.datetime.strptime('2020-12-26 17:00:00', '%Y-%m-%d %H:%M:%S'),datetime.datetime.strptime('2020-12-27 17:00:00', '%Y-%m-%d %H:%M:%S'))
-#src.Clustering2.community_detect(datetime.datetime.strptime('2020-12-26 17:00:00', '%Y-%m-%d %H:%M:%S'),datetime.datetime.strptime('2020-12-27 17:00:00', '%Y-%m-%d %H:%M:%S'))
+src.Louvain_clustering_algorithm.community_detect(datetime.datetime.strptime('2020-12-26 17:00:00', '%Y-%m-%d %H:%M:%S'),datetime.datetime.strptime('2020-12-27 17:00:00', '%Y-%m-%d %H:%M:%S'))
+#src.Attractiveness_based_community_detection.community_detect(datetime.datetime.strptime('2020-12-26 17:00:00', '%Y-%m-%d %H:%M:%S'),datetime.datetime.strptime('2020-12-27 17:00:00', '%Y-%m-%d %H:%M:%S'))
