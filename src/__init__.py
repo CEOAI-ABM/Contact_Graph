@@ -2,5 +2,7 @@ from .master import *
 from .graph import *
 from .trajectory import *
 from .completegraph import *
-from .Clustering1 import *
-from .Clustering2 import *
+from .Attractiveness_based_community_detection import *
+from .Louvain_clustering_algorithm import *
+
+
