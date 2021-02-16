@@ -1,3 +1,13 @@
 numpy
 pandas
 python-louvain
+networkx
+matplotlib
+mysql
+seaborn
+pykalman
+datetime
+pyvis.network
+community.community_louvain
+geopy
+json
