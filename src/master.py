@@ -86,7 +86,7 @@ def Run(deviceid, time_ref):
 							score[dict_identity[dev_id]]= score_tmp
 
 	#############################################imputed score addition ########
-	query = ("SELECT * FROM imputed WHERE time BETWEEN '{}' AND '{}'".format(max(begin_time,time_ref-datetime.timedelta(days=prm.duration)),time_ref))  ## incomplete
+	"""query = ("SELECT * FROM imputed WHERE time BETWEEN '{}' AND '{}'".format(max(begin_time,time_ref-datetime.timedelta(days=prm.duration)),time_ref))  ## incomplete
 	db_cursor.execute(query)
 	df_imp=pd.DataFrame(db_cursor.fetchall())
 	if df_imp.empty:
@@ -106,7 +106,7 @@ def Run(deviceid, time_ref):
 						score[df_tmp.iloc[j,2]]+= score_tmp
 					except:
 						score[df_tmp.iloc[j,2]]= score_tmp
-
+        """
 
 	#############################################
 	node_list=[inf_node]
